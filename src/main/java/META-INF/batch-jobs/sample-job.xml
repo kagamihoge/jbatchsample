@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="sample-job"
+     xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+     version="1.0">
+     
+     <step id="sample-batchlet">
+         <batchlet ref="kagamihoge.glassfish4.javaee7.jbatchsample.batch.SampleBatchlet" />
+     </step>
+</job>
