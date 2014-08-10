@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="sample-job-partition" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	version="1.0">
+
+	<properties>
+		<property name="input_dir" value="C:\\Java\\sampleinput" />
+		<property name="output_dir" value="C:\\Java\\sampleoutput" />
+	</properties>
+
+	<step id="myStep">
+		<chunk>
+			<reader ref="mySampleReader"></reader>
+			<processor ref="mySampleProcessor"></processor>
+			<writer ref="mySampleWriter"></writer>
+		</chunk>
+		<partition>
+			<mapper ref="myPartitionMapper"/>
+			<!-- 
+			<plan partitions="2" threads="2">
+				<properties partition="0">
+					<property name="file" value="input1.txt" />
+				</properties>
+				<properties partition="1">
+					<property name="file" value="input2.txt" />
+				</properties>
+			</plan>
+			 -->
+
+			<reducer ref="myReducer" />
+
+			<!-- 今回は使わなかったCollector, Analyzer
+			<collector ref="myCollector" />
+			<analyzer ref="myAnalyzer" />
+			<reducer ref="myReducer" />
+			-->
+			
+		</partition>
+		
+		<end on="COMPLETED"/>
+	</step>
+</job>
