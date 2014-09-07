@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job id="sample-job-partition" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	version="1.0">
+
+	<listeners>
+		<listener ref="executionTimeJobListener"></listener>
+	</listeners>
+
+	<step id="myStep">
+		<chunk item-count="100"><!-- item-count="100" -->
+			<reader ref="myDataloadReader"></reader>
+			<processor ref="myDataloadProcessor"></processor>
+			<writer ref="myDataloadWriter"></writer>
+		</chunk>
+		<partition>
+			<plan partitions="3" threads="3">
+				<properties partition="0">
+				    <property name="startId" value="1" />
+					<property name="file" value="C:\\Java\\sampledataload\\input_p_1.txt" />
+				</properties>
+                <properties partition="1">
+                    <property name="startId" value="10001" />
+                    <property name="file" value="C:\\Java\\sampledataload\\input_p_2.txt" />
+                </properties>
+                <properties partition="2">
+                    <property name="startId" value="20001" />
+                    <property name="file" value="C:\\Java\\sampledataload\\input_p_3.txt" />
+                </properties>
+			</plan>
+		</partition>
+
+		<end on="COMPLETED" />
+	</step>
+</job>
